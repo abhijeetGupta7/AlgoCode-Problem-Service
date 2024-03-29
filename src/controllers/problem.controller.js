@@ -9,35 +9,47 @@ function pingProblemController(req,res) {
 
 function addProblem(req,res,next) {
     try {
-        throw new NotImplemented("addProblem");
+        throw new NotImplemented("Add Problem");
     }
     catch(error) {
-        next(error);
+        next(error);      // error handling middleware is called
     }
 }
 
-function getProblem(req,res) {
-    return res.status(statusCodes.NOT_IMPLEMENTED).json({
-        message:"Not implemented"
-    });
+function getProblem(req,res,next) {
+    try {
+        throw new NotImplemented("Get Problem");
+    }
+    catch(error) {
+        next(error);      // error handling middleware is called
+    }
 }
 
-function getProblems(req,res) {
-    return res.status(statusCodes.NOT_IMPLEMENTED).json({
-        message:"Not implemented"
-    });
+function getProblems(req,res,next) {
+    try {
+        throw new NotImplemented("Get Problems");
+    }
+    catch(error) {
+        next(error);      // error handling middleware is called
+    }
 }
 
-function deleteProblem(req,res) {
-    return res.status(statusCodes.NOT_IMPLEMENTED).json({
-        message:"Not implemented"
-    });
+function deleteProblem(req,res,next) {
+    try {
+        throw new NotImplemented("Delete Problem");
+    }
+    catch(error) {
+        next(error);      // error handling middleware is called
+    }
 }
 
-function updateProblem(req,res) {
-    return res.status(statusCodes.NOT_IMPLEMENTED).json({
-        message:"Not implemented"
-    });
+function updateProblem(req,res,next) {
+    try {
+        throw new NotImplemented("Update Problem");
+    }
+    catch(error) {
+        next(error);      // error handling middleware is called
+    }
 }
 
 module.exports={

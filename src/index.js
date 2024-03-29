@@ -19,8 +19,9 @@ app.get("/ping",(req,res)=> {
     });
 });
 
-
+// last middleware if any error occurs
 app.use(errorHandler);
+
 
 app.listen(PORT,()=>{
     console.log(`Server is listening at PORT ${PORT}`);

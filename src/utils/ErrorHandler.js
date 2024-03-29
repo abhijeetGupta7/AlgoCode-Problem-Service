@@ -1,7 +1,7 @@
 const BaseError = require("../error/BaseError");
 const statusCodes=require("http-status-codes");
 
-function errorHandler(err,req,res,next) {
+function errorHandler(err,req,res,next) {            // before the default error Handling middleware
     if(err instanceof BaseError) {
         return res.status(err.statusCode).json({
             success:"False",
