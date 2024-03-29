@@ -3,6 +3,7 @@ const { PORT }=require("./config/server.config");
 const bodyParser=require("body-parser");
 
 const apiRouter=require("./routes");
+const errorHandler = require("./utils/ErrorHandler");
 
 const app=express();
 
@@ -17,6 +18,10 @@ app.get("/ping",(req,res)=> {
         "Welcome":"ABC"
     });
 });
+
+// last middleware if any error occurs
+app.use(errorHandler);
+
 
 app.listen(PORT,()=>{
     console.log(`Server is listening at PORT ${PORT}`);
