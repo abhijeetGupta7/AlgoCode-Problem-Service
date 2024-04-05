@@ -24,9 +24,8 @@ app.get("/ping",(req,res)=> {
 // last middleware if any error occurs
 app.use(errorHandler);
 
-const Cat = mongoose.model('Cat', { name: String });
-
-app.listen(PORT,()=>{
+app.listen(PORT, async ()=>{
     console.log(`Server is listening at PORT ${PORT}`);
     connectToDB();
+    console.log("Successsfully connected to DB");
 });
