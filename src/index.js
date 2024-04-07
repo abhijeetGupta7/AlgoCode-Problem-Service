@@ -1,11 +1,11 @@
 const express=require("express");
-const { PORT }=require("./config/server.config");
+const { PORT,ATLAS_DB_URL }=require("./config/server.config");
 const bodyParser=require("body-parser");
 const mongoose=require("mongoose");
 
 const apiRouter=require("./routes");
 const errorHandler = require("./utils/ErrorHandler");
-const connectToDB = require("./config/db.config");
+const connectToDB  = require("./config/db.config");
 
 const app=express();
 
@@ -21,11 +21,12 @@ app.get("/ping",(req,res)=> {
     });
 });
 
-// last middleware if any error occurs
+// last errorHandling middleware, if any error occurs
 app.use(errorHandler);
 
 app.listen(PORT, async ()=>{
     console.log(`Server is listening at PORT ${PORT}`);
-    connectToDB();
+    //await mongoose.connect(ATLAS_DB_URL);
+    await connectToDB();
     console.log("Successsfully connected to DB");
 });

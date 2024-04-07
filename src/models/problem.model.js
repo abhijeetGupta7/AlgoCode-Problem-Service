@@ -26,9 +26,12 @@ const problemSchema=new mongoose.Schema({
                 required:true
             }
         }
-    ]
-})
+    ],
+    editorial:{
+        type:String
+    }
+});
 
-const Problem=mongoose.model("Problem",problemSchema);
+const Problem=mongoose.model('Problem',problemSchema);
 
 module.exports=Problem;

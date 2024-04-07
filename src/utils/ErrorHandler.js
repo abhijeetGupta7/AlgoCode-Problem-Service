@@ -1,5 +1,5 @@
 const BaseError = require("../error/BaseError");
-const statusCodes=require("http-status-codes");
+const { statusCodes }=require("http-status-codes");
 
 function errorHandler(err,req,res,next) {            // before the default error Handling middleware
     if(err instanceof BaseError) {
