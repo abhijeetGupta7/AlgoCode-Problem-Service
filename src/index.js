@@ -26,7 +26,7 @@ app.use(errorHandler);
 
 app.listen(PORT, async ()=>{
     console.log(`Server is listening at PORT ${PORT}`);
-    //await mongoose.connect(ATLAS_DB_URL);
-    await connectToDB();
+    await mongoose.connect(ATLAS_DB_URL);
+    //await connectToDB();
     console.log("Successsfully connected to DB");
 });

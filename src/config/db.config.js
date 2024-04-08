@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 
-const {PORT,ATLAS_DB_URL,NODE_ENV}=require("./server.config");
+const {ATLAS_DB_URL,NODE_ENV}=require("./server.config");
 
 async function connectToDB() {
     try {

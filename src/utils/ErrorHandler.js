@@ -1,5 +1,5 @@
 const BaseError = require("../error/BaseError");
-const { statusCodes }=require("http-status-codes");
+const { StatusCodes }=require("http-status-codes");
 
 function errorHandler(err,req,res,next) {            // before the default error Handling middleware
     if(err instanceof BaseError) {
@@ -11,9 +11,9 @@ function errorHandler(err,req,res,next) {            // before the default error
         }); 
     }
 
-    return res.status(statusCodes.INTERNAL_SERVER_ERROR).json({
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         success:"False",
-        message:"Something went wrong",
+        message:"Something went wrong!",
         error:err,
         data:{}    // bcz this is an exception so no data is going to be provided
     })
