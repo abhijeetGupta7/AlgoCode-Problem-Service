@@ -26,18 +26,25 @@ async function addProblem(req,res,next) {
     }
 }
 
-function getProblem(req,res,next) {
+async function getProblems(req,res,next) {
     try {
-        throw new NotImplemented("Get Problem");
+        const allProblems=await problemService.getAllProblems();
+        console.log(allProblems);
+        return res.status(StatusCodes.OK).json({
+            "success":true,
+            "message":"successfully fetched all the problems",
+            "error":{},
+            "data":allProblems
+        });
     }
     catch(error) {
         next(error);      // error handling middleware is called
     }
 }
 
-function getProblems(req,res,next) {
+function getProblem(req,res,next) {
     try {
-        throw new NotImplemented("Get Problems");
+        throw new NotImplemented("Get Problem");
     }
     catch(error) {
         next(error);      // error handling middleware is called
