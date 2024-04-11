@@ -1,5 +1,10 @@
-const statusCodes=require("http-status-codes");
+const StatusCodes=require("http-status-codes");
 const NotImplemented = require("../error/not_implemented.error");
+const { ProblemService }=require("../services");
+const { ProblemRepository }=require("../repositories");
+const NotFoundError = require("../error/notFoundError");
+
+const problemService=new ProblemService(new ProblemRepository()); 
 
 function pingProblemController(req,res) {
     return res.json({
@@ -7,27 +12,46 @@ function pingProblemController(req,res) {
     })
 }
 
-function addProblem(req,res,next) {
+async function addProblem(req,res,next) {
     try {
-        throw new NotImplemented("Add Problem");
+        const newProblem=await problemService.createProblem(req.body);
+        return res.status(StatusCodes.CREATED).json({
+            message:"Success",
+            error:{},
+            data:newProblem
+        })
     }
     catch(error) {
         next(error);      // error handling middleware is called
     }
 }
 
-function getProblem(req,res,next) {
+async function getProblems(req,res,next) {
     try {
-        throw new NotImplemented("Get Problem");
+        const allProblems=await problemService.getAllProblems();
+        return res.status(StatusCodes.OK).json({
+            "success":true,
+            "message":"successfully fetched all the problems",
+            "error":{},
+            "data":allProblems
+        });
     }
     catch(error) {
         next(error);      // error handling middleware is called
     }
 }
 
-function getProblems(req,res,next) {
+
+async function getProblem(req,res,next) {
     try {
-        throw new NotImplemented("Get Problems");
+        const id=req.params.id;
+        const problem=await problemService.getProblem(id);
+        return res.status(StatusCodes.OK).json({
+            "success":true,
+            "message":`Successfully fetch the problem with id:${id}`,
+            "error":{},
+            "data":problem
+        });
     }
     catch(error) {
         next(error);      // error handling middleware is called
