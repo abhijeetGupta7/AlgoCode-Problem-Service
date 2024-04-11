@@ -9,16 +9,20 @@ class ProblemService {
             // Sanitize the markdown for description
             problemData.description=sanitizeMarkDownContent(problemData.description);
             
-            console.log("ProblemData",problemData);
             const problem=await this.problemRepository.createProblem(problemData);
             
-            console.log("Problem created",problem);
             return problem;
     }
 
     async getAllProblems() {
         const allProblems=await this.problemRepository.getAllProblems();
         return allProblems;
+    }
+
+
+    async getProblem(id) {
+        const problem=await this.problemRepository.getProblem(id);
+        return problem;
     }
 }
 

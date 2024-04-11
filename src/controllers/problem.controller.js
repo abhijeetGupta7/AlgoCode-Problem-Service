@@ -2,6 +2,7 @@ const StatusCodes=require("http-status-codes");
 const NotImplemented = require("../error/not_implemented.error");
 const { ProblemService }=require("../services");
 const { ProblemRepository }=require("../repositories");
+const NotFoundError = require("../error/notFoundError");
 
 const problemService=new ProblemService(new ProblemRepository()); 
 
@@ -13,7 +14,6 @@ function pingProblemController(req,res) {
 
 async function addProblem(req,res,next) {
     try {
-        console.log("Incoming request body",req.body);
         const newProblem=await problemService.createProblem(req.body);
         return res.status(StatusCodes.CREATED).json({
             message:"Success",
@@ -29,7 +29,6 @@ async function addProblem(req,res,next) {
 async function getProblems(req,res,next) {
     try {
         const allProblems=await problemService.getAllProblems();
-        console.log(allProblems);
         return res.status(StatusCodes.OK).json({
             "success":true,
             "message":"successfully fetched all the problems",
@@ -42,9 +41,17 @@ async function getProblems(req,res,next) {
     }
 }
 
-function getProblem(req,res,next) {
+
+async function getProblem(req,res,next) {
     try {
-        throw new NotImplemented("Get Problem");
+        const id=req.params.id;
+        const problem=await problemService.getProblem(id);
+        return res.status(StatusCodes.OK).json({
+            "success":true,
+            "message":`Successfully fetch the problem with id:${id}`,
+            "error":{},
+            "data":problem
+        });
     }
     catch(error) {
         next(error);      // error handling middleware is called

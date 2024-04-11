@@ -1,4 +1,5 @@
 const { Problem }=require("../models");
+const NotFoundError=require("../error/notFoundError");
 
 class ProblemRepository {
 
@@ -22,6 +23,19 @@ class ProblemRepository {
             const allProblems=await Problem.find();
             return allProblems;            
         } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    async getProblem(id) {
+        try {
+            const problem=await Problem.findById(id);
+            if(!problem) {
+                throw new NotFoundError("Problem",id);
+            }
+            return problem; 
+        } catch(error) {
             console.log(error);
             throw error;
         }
