@@ -48,7 +48,7 @@ async function getProblem(req,res,next) {
         const problem=await problemService.getProblem(id);
         return res.status(StatusCodes.OK).json({
             "success":true,
-            "message":"successfully fetched all the problems",
+            "message":"successfully fetched the problem",
             "error":{},
             "data":problem
         });

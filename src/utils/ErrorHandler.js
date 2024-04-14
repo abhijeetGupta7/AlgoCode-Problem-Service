@@ -11,6 +11,7 @@ function errorHandler(err,req,res,next) {            // before the default error
         }); 
     }
 
+    logger.error("Something went error");
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         success:"False",
         message:"Something went wrong!",
