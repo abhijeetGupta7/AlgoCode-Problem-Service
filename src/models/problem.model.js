@@ -27,11 +27,32 @@ const problemSchema=new mongoose.Schema({
             }
         }
     ],
+    codeStubs:[
+        {
+            language:{
+                type:String,
+                required:true,
+                enum:["CPP","PYTHON","JAVA"]
+            },
+            startCode:{
+                type:String,
+                required:true,
+            },
+            endCode:{
+                type:String,  // for java and python
+            },
+            userCode:{
+                type:String,
+                required:true
+            }
+        }
+    ],
     editorial:{
         type:String
     }
 });
 
 const Problem=mongoose.model('Problem',problemSchema);
+
 
 module.exports=Problem;

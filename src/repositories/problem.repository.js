@@ -1,4 +1,5 @@
 const { Problem }=require("../models");
+const logger=require("../config/logger.config");
 const NotFoundError=require("../error/notFoundError");
 
 class ProblemRepository {
@@ -8,7 +9,8 @@ class ProblemRepository {
             const problem=await Problem.create({
                 title:problemData.title,
                 description:problemData.description,
-                testcases:(problemData.testcases) ? problemData.testcases:[]
+                testcases:(problemData.testcases) ? problemData.testcases:[],
+                codeStubs:problemData.codeStubs
             });
 
             return problem;
@@ -37,6 +39,32 @@ class ProblemRepository {
             return problem; 
         } catch(error) {
             console.log(error);
+            throw error;
+        }
+    }
+
+
+    async deleteProblem(id) {
+        try {
+            const deletedProblem=await Problem.findByIdAndDelete(id);
+            if(!deletedProblem) { 
+                logger.error(`Problem with id: ${id} not found in db`);
+                throw new NotFoundError("Problem",id);
+            }
+            return deletedProblem;
+        } catch(error) {
+            throw error;
+        }
+    }
+
+    async updateProblem(id,problemData) {
+        try {
+            const updatedProblem=await Problem.findByIdAndUpdate(id,problemData,{new:true});
+            if(!updatedProblem) {
+                throw new NotFoundError("Problem",id);
+            }           
+            return updatedProblem;
+        } catch(error) {
             throw error;
         }
     }

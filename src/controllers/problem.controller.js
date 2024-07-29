@@ -7,7 +7,7 @@ const NotFoundError = require("../error/notFoundError");
 const problemService=new ProblemService(new ProblemRepository()); 
 
 function pingProblemController(req,res) {
-    return res.json({
+    return res.status(200).json({
         "message":"Ping controller is up"
     })
 }
@@ -48,7 +48,7 @@ async function getProblem(req,res,next) {
         const problem=await problemService.getProblem(id);
         return res.status(StatusCodes.OK).json({
             "success":true,
-            "message":`Successfully fetch the problem with id:${id}`,
+            "message":"successfully fetched the problem",
             "error":{},
             "data":problem
         });
@@ -58,18 +58,31 @@ async function getProblem(req,res,next) {
     }
 }
 
-function deleteProblem(req,res,next) {
+async function deleteProblem(req,res,next) {
     try {
-        throw new NotImplemented("Delete Problem");
+        const id=req.params.id;
+        const deletedProblem=await problemService.deleteProblem(id);
+        return res.status(StatusCodes.OK).json({
+            "success":true,
+            "message":`Problem with id ${id} is successfully deleted`,
+            "error":{},
+            "data": deletedProblem
+        });
     }
     catch(error) {
         next(error);      // error handling middleware is called
     }
 }
 
-function updateProblem(req,res,next) {
+async function updateProblem(req,res,next) {
     try {
-        throw new NotImplemented("Update Problem");
+        const problem=await problemService.updateProblem(req.params.id,req.body);
+        return res.status(StatusCodes.OK).json({
+            "success":true,
+            "message":`Problem with id: ${req.params.id} is successfully updated`,
+            "error":{},
+            "data":problem
+        });
     }
     catch(error) {
         next(error);      // error handling middleware is called

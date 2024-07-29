@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use("/api",apiRouter);
 
 app.get("/ping",(req,res)=> {
-    return res.json({
+    return res.status(200).json({
         "Welcome":"ABC"
     });
 });
@@ -30,3 +30,6 @@ app.listen(PORT, async ()=>{
     //await connectToDB();
     console.log("Successsfully connected to DB");
 });
+
+
+
