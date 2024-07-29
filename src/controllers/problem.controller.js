@@ -7,7 +7,7 @@ const NotFoundError = require("../error/notFoundError");
 const problemService=new ProblemService(new ProblemRepository()); 
 
 function pingProblemController(req,res) {
-    return res.json({
+    return res.status(200).json({
         "message":"Ping controller is up"
     })
 }
