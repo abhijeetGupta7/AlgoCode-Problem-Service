@@ -39,7 +39,7 @@ const problemSchema=new mongoose.Schema({
                 required:true,
             },
             endCode:{
-                type:String,  // for java and python
+                type:String,  // for java and python it can be "" empty string
             },
             userCode:{
                 type:String,
